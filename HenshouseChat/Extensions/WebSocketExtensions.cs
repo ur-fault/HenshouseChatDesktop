@@ -4,7 +4,7 @@ namespace HenshouseChat.Extensions;
 
 public static class WebSocketExtensions
 {
-    public static async Task<byte[]> ReceiveSingleAsync(this ClientWebSocket ws, CancellationToken ct = default) {
+    public static async Task<byte[]?> ReceiveSingleAsync(this ClientWebSocket ws, CancellationToken ct = default) {
         var tmpBuffer = new byte[1024];
         var receiveBuffer = new MemoryStream();
 
@@ -15,9 +15,9 @@ public static class WebSocketExtensions
             receiveBuffer.Write(tmpBuffer, 0, receiveResult.Count);
             if (receiveResult.EndOfMessage)
                 break;
-            
+
             if (receiveResult.MessageType == WebSocketMessageType.Close)
-                throw new WebSocketException("Connection closed");
+                return null;
         }
 
         receiveBuffer.Seek(0, SeekOrigin.Begin);

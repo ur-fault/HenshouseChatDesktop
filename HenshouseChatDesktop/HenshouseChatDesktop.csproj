@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SharpVectors" Version="1.8.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\user_icon.svg" />
+      <Resource Include="Resources\user_icon.svg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HenshouseChat\HenshouseChat.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -43,18 +43,31 @@ public class Client : IDisposable
         return new Client(ws, localAsymmetric, remoteAsymmetric, symmetric);
     }
 
-    public async Task ListenAsync(Action<ServerMessage> callback, CancellationToken ct = default) {
+    public async Task ListenAsync(Action<ServerMessage> onMessage, Action? onError = null, Action? onNormalClose = null, CancellationToken ct = default) {
         try {
             while (true) {
-                var encoded = await _ws.ReceiveSingleAsync(ct: ct);
+                byte[]? encoded;
+                try {
+                    encoded = await _ws.ReceiveSingleAsync(ct: ct);
+                }
+                catch (WebSocketException e) {
+                    onError?.Invoke();
+                    return;
+                }
+
+                if (encoded is null) {
+                    onNormalClose?.Invoke();
+                    return;
+                }
+
                 var decoded = Symmetric.DecodeToString(encoded);
-                
-                callback(JsonSerializer.Deserialize<ServerMessage>(decoded) ??
+
+                onMessage(JsonSerializer.Deserialize<ServerMessage>(decoded) ??
                          throw new InvalidOperationException($"Could not parse {decoded}"));
             }
         }
         finally {
-            await Disconnect();
+            await Disconnect(ct);
         }
     }
 

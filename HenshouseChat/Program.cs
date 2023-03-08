@@ -6,7 +6,7 @@ Console.WriteLine("Connected");
 var cancel = new CancellationTokenSource();
 
 var task = Task.Run(() =>
-        client.ListenAsync(msg => Console.WriteLine($"{msg.Author} >> {msg.Content}"), cancel.Token),
+        client.ListenAsync(msg => Console.WriteLine($"{msg.Author} >> {msg.Content}"), ct: cancel.Token),
     cancel.Token);
 
 Console.WriteLine("Press any key to stop");

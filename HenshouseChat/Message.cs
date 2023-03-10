@@ -8,9 +8,10 @@ public enum MessageType
     Command
 }
 
-public class Message
+public record Message
 {
     [JsonIgnore] public MessageType Type { get; set; }
+
     [JsonPropertyName("type")]
     public string TypeString {
         get => Type.ToString().ToLower();
@@ -20,7 +21,7 @@ public class Message
             _ => throw new InvalidOperationException($"Invalid message type {value}")
         };
     }
-    
+
     [JsonPropertyName("content")] public string? Content { get; set; }
     [JsonPropertyName("command")] public string? Command { get; set; }
     [JsonPropertyName("command_args")] public string? CommandArgs { get; set; }

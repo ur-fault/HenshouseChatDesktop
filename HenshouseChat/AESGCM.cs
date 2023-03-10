@@ -31,17 +31,22 @@ public class AESGCM : ISymmetric, IDisposable
     }
 
     public byte[] Decode(byte[] encoded) {
-        var encodedSpan = (Span<byte>)encoded;
+        try {
+            var encodedSpan = (Span<byte>)encoded;
 
-        var tag = encodedSpan[^16..];
-        var nonce = encodedSpan[..12];
-        var content = encodedSpan[12..^16];
+            var tag = encodedSpan[^16..];
+            var nonce = encodedSpan[..12];
+            var content = encodedSpan[12..^16];
 
-        var decoded = new byte[content.Length];
+            var decoded = new byte[content.Length];
 
-        Key.Decrypt(nonce, content, tag, decoded);
+            Key.Decrypt(nonce, content, tag, decoded);
 
-        return decoded;
+            return decoded;
+        }
+        catch (ArgumentOutOfRangeException) {
+            throw new InvalidOperationException("Cannot decode message");
+        }
     }
 
     public string DecodeToString(byte[] encoded) => Encoding.UTF8.GetString(Decode(encoded));

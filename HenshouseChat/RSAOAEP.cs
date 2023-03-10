@@ -1,7 +1,6 @@
 using System.Formats.Asn1;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Unicode;
 
 namespace HenshouseChat;
 
@@ -34,16 +33,16 @@ public class RSAOAEP : IAsymmetric, IDisposable
 
     public string ExportPublicPem() {
         var parameters = Key.ExportParameters(false);
-        
-        AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
+
+        var writer = new AsnWriter(AsnEncodingRules.DER);
         writer.PushSequence();
         writer.WriteInteger(parameters.Modulus);
         writer.WriteInteger(parameters.Exponent);
         writer.PopSequence();
-        byte[] rsaPublicKey = writer.Encode();
+        var rsaPublicKey = writer.Encode();
 
-        string base64 = Convert.ToBase64String(rsaPublicKey);
-        string pem = $"-----BEGIN RSA PUBLIC KEY-----\n{base64}\n-----END RSA PUBLIC KEY-----";
+        var base64 = Convert.ToBase64String(rsaPublicKey);
+        var pem = $"-----BEGIN RSA PUBLIC KEY-----\n{base64}\n-----END RSA PUBLIC KEY-----";
         return pem;
     }
 

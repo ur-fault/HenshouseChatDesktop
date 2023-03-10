@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using HenshouseChat;
+﻿using HenshouseChat;
 
 var client = await Client.ConnectTo("192.168.1.248");
 Console.WriteLine("Connected");

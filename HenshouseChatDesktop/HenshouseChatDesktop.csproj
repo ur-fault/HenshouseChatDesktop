@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
@@ -12,7 +12,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Resources\send.svg" />
       <None Remove="Resources\user_icon.svg" />
+      <Resource Include="Resources\send.svg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="Resources\user_icon.svg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
@@ -20,6 +24,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\HenshouseChat\HenshouseChat.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="View\UserControls\ValidatedTextBox.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>

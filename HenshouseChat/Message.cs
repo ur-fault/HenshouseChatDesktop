@@ -36,4 +36,10 @@ public record Message
         Command = cmd,
         CommandArgs = args
     };
+
+    public string MessageContent => Type switch {
+        MessageType.Command => $"/{Command} {CommandArgs}",
+        MessageType.Message => Content,
+        _ => throw new ArgumentOutOfRangeException()
+    } ?? throw new InvalidOperationException();
 }

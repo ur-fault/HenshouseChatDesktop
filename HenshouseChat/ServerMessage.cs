@@ -9,4 +9,7 @@ public record ServerMessage : Message
 
     [JsonPropertyName("recipient")] public string Recipient { get; set; }
     [JsonPropertyName("recipient_id")] public long RecipientId { get; set; }
+
+    [JsonPropertyName("private")] public bool IsPrivate { get; set; }
+    [JsonIgnore] public bool IsMine => AuthorId == RecipientId;
 }

@@ -35,8 +35,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <svgc:SvgViewbox Grid.Column="0" Source="Resources/user_icon.svg"
-                             Width="17" Height="17" Margin="12 0 0 0" />
+            <svgc:SvgIcon Grid.Column="0" UriSource="Resources/user_icon.svg"
+                             Width="17" Height="17" Margin="12 0 0 0" Fill="{StaticResource Light}"/>
             <Border Grid.Column="1" CornerRadius="9" Margin="12 0 0 0 ">
                 <Grid>
                     <TextBlock Text="{Binding WatermarkText}" d:Text="Watermark"

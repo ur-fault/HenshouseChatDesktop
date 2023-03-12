@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HenshouseChat;
@@ -29,17 +28,24 @@ public class ClientViewModel : INotifyPropertyChanged
                 await Client!.ListenAsync(
                     msg => {
                         OnPropertyChanged(nameof(Nickname));
-                        OnMessage?.Invoke(msg);
+                        Application.Current.Dispatcher.BeginInvoke(() => {
+                            Messages.Add(msg);
+                            OnPropertyChanged(nameof(Messages));
+                            OnMessage?.Invoke(msg);
+                        });
                     }, OnError, OnNormalClose);
             });
         }
     }
+
+    public ObservableCollection<ServerMessage> Messages { get; } = new();
 
     public bool IsConnected => _client != null;
 
     public void Disconnect() {
         Client?.Disconnect();
         Client = null;
+        MessageBox.Show("Disconnected");
     }
 
     public Action<ServerMessage>? OnMessage;
@@ -60,16 +66,23 @@ public class ClientViewModel : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    private string _currentMessage = "";
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    public string CurrentMessage {
+        get => _currentMessage;
+        set => SetField(ref _currentMessage, value);
     }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
         if (EqualityComparer<T>.Default.Equals(field, value)) return false;
         field = value;
         OnPropertyChanged(propertyName);
         return true;
+    }
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

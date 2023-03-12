@@ -13,5 +13,7 @@
         <SolidColorBrush x:Key="Yellow">#FFC857</SolidColorBrush>
         <SolidColorBrush x:Key="Green">#81E979</SolidColorBrush>
         <SolidColorBrush x:Key="Light">#F3F3F3</SolidColorBrush>
+        <DropShadowEffect x:Key="ShadowEffect" Direction="270" BlurRadius="4" ShadowDepth="4" Opacity="0.25"
+                          Color="Black" />
     </Application.Resources>
 </Application>

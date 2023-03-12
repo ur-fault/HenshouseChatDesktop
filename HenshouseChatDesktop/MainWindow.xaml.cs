@@ -82,7 +82,7 @@ public partial class MainWindow : Window
     public MainWindow() {
         InitializeComponent();
 
-        DomainTextBox.ValidationFunction =
+        AddressTextBox.ValidationFunction =
             (tb, s) => DomainNameRegex.IsMatch(s) || Ipv4Regex.IsMatch(s);
 
         PortTextBox.ValidationFunction =
@@ -113,7 +113,7 @@ public partial class MainWindow : Window
                 }
             );
 
-        DomainTextBox.FocusInput();
+        AddressTextBox.FocusInput();
         NicknameTextBox.OnEnterPressedAction = () => MessageTextBox.Focus();
 
         // FIXME: don't scroll to the end on new message when user was not already there
@@ -137,8 +137,8 @@ public partial class MainWindow : Window
             case ConnectionStatus.Disconnected:
             case ConnectionStatus.Error:
                 try {
-                    if (!DomainTextBox.IsValid) {
-                        MessageBox.Show("Domain must be valid URI domain");
+                    if (!AddressTextBox.IsValid) {
+                        MessageBox.Show("Address must be valid URI domain");
                         return;
                     }
 
@@ -148,7 +148,7 @@ public partial class MainWindow : Window
                     }
 
                     SetValue(StatusProperty, ConnectionStatus.Connecting);
-                    var client = await Client.ConnectTo(ConnectionInfo.Domain,
+                    var client = await Client.ConnectTo(ConnectionInfo.Address,
                         int.Parse(ConnectionInfo.Port),
                         _connectionCancel.Token);
                     SetValue(StatusProperty, ConnectionStatus.Connected);
@@ -181,7 +181,7 @@ public partial class MainWindow : Window
     }
 
     private void MessageTextBox_OnKeyDown(object sender, KeyEventArgs e) {
-        if (e.Key == Key.Enter)
+        if (e.Key == Key.Enter && SendButtonState == SendButtonState.Normal)
             SendButton_OnClick(sender, new RoutedEventArgs());
     }
 

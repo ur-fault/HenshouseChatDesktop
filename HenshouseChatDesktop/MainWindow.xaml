@@ -125,10 +125,10 @@
                     </Grid.ColumnDefinitions>
 
                     <ulocal:ValidatedIconedTextBox x:Name="NicknameTextBox" Grid.Column="0" Width="189"
-                                                   Text="{Binding DataContext.Nickname, FallbackValue='ur-fault', RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                   Text="{Binding DataContext.Nickname, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                                    WatermarkText="Enter nickname" />
-                    <ulocal:ValidatedTextBox x:Name="DomainTextBox" Grid.Column="2" Width="189"
-                                             Text="{Binding Domain, FallbackValue='192.168.1.248', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <ulocal:ValidatedTextBox x:Name="AddressTextBox" Grid.Column="2" Width="189"
+                                             Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                              TextAlignment="Right" WatermarkText="Enter domain" />
 
                     <Rectangle Grid.Column="3" RadiusX="1" RadiusY="1" Width="2" Height="17" Margin="7 0 7 0"

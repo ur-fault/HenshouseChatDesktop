@@ -89,6 +89,63 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+
+        <Style x:Key="AuthorBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="15 0 15 15" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource Grey4}" />
+            <Setter Property="Margin" Value="17 5" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Effect" Value="{StaticResource ShadowEffect}" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Padding" Value="6 6"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="CornerRadius" Value="15 15 0 15" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AuthorTextStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Padding" Value="14 0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource Light}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource Green}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ContentBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Grey4}" />
+            <Setter Property="Padding" Value="14 6" />
+            <Setter Property="CornerRadius" Value="0 15 15 15" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Margin" Value="0 5" />
+            <Setter Property="Effect" Value="{StaticResource ShadowEffect}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Green}" />
+                    <Setter Property="CornerRadius" Value="15 15 15 0" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ContentTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="{StaticResource Light}" />
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Green}" />
+                    <Setter Property="Foreground" Value="{StaticResource Grey5}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
 
@@ -146,8 +203,7 @@
             <ListView Name="MessagesListView" ItemsSource="{Binding Messages}" d:ItemsSource="{d:SampleData}"
                       Background="#00000000"
                       BorderThickness="0" ScrollViewer.CanContentScroll="True" VirtualizingPanel.ScrollUnit="Pixel"
-                      Margin="0 5" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                      Margin="0 5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.Template>
                     <ControlTemplate>
                         <ScrollViewer>
@@ -166,61 +222,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DataTemplate.Resources>
-                            <Style x:Key="AuthorBorderStyle" TargetType="Border">
-                                <Setter Property="CornerRadius" Value="15 0 15 15" />
-                                <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="BorderBrush" Value="{StaticResource Grey4}" />
-                                <Setter Property="Margin" Value="17 5" />
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Effect" Value="{StaticResource ShadowEffect}" />
-                                <Setter Property="VerticalAlignment" Value="Top" />
-                                <Setter Property="Padding" Value="6 6"></Setter>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMine}" Value="True">
-                                        <Setter Property="CornerRadius" Value="15 15 0 15" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                            <Style x:Key="AuthorTextStyle" TargetType="TextBlock">
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                                <Setter Property="Padding" Value="14 0" />
-                                <Setter Property="FontSize" Value="14" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="Foreground" Value="{StaticResource Light}" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMine}" Value="True">
-                                        <Setter Property="Foreground" Value="{StaticResource Green}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-
-                            <Style x:Key="ContentBorderStyle" TargetType="Border">
-                                <Setter Property="Background" Value="{StaticResource Grey4}" />
-                                <Setter Property="Padding" Value="14 6" />
-                                <Setter Property="CornerRadius" Value="0 15 15 15" />
-                                <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="BorderBrush" Value="Black" />
-                                <Setter Property="Margin" Value="0 5" />
-                                <Setter Property="Effect" Value="{StaticResource ShadowEffect}" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMine}" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource Green}" />
-                                        <Setter Property="CornerRadius" Value="15 15 15 0" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                            <Style x:Key="ContentTextStyle" TargetType="TextBlock">
-                                <Setter Property="FontSize" Value="16" />
-                                <Setter Property="Foreground" Value="{StaticResource Light}" />
-                                <Setter Property="TextWrapping" Value="Wrap"></Setter>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMine}" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource Green}" />
-                                        <Setter Property="Foreground" Value="{StaticResource Grey5}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
                         </DataTemplate.Resources>
                         <Grid>
                             <Grid.ColumnDefinitions>

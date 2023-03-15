@@ -45,7 +45,6 @@ public class ClientViewModel : INotifyPropertyChanged
     public void Disconnect() {
         Client?.Disconnect();
         Client = null;
-        MessageBox.Show("Disconnected");
     }
 
     public Action<ServerMessage>? OnMessage;

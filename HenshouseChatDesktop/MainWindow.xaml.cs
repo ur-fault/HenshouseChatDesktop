@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -96,14 +97,13 @@ public partial class MainWindow : Window
                         : Visibility.Hidden);
         };
 
-        ClientViewModel.OnMessage = message =>
-            Dispatcher.BeginInvoke(() => {
+        ClientViewModel.OnMessage = message => {
                 if (!_scrollToEnd) return;
 
                 var viewer = GetScrollViewer(MessagesListView) ??
                              throw new InvalidOperationException("Cannot find ScrollViewer");
                 viewer.ScrollToEnd();
-            });
+            };
 
         ClientViewModel.OnError = error =>
             Dispatcher.BeginInvoke(() => {

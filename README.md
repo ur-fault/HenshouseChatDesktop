@@ -1,4 +1,4 @@
-# HenshouseChatDesktop
+# Henshouse Chat Desktop
 ## What is this ?
 This is desktop client for [Henshouse Chatroom](https://henshouse.github.io/), This one in particular is for Windows based on WPF.
 For now, this supports version __2.2__ of server, and there are no future plans to supports newer or older versions.

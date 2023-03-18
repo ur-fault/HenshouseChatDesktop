@@ -5,6 +5,7 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
       <!--<SelfContained>true</SelfContained>-->
     </PropertyGroup>
 
@@ -15,6 +16,7 @@
     <ItemGroup>
       <None Remove="Resources\send.svg" />
       <None Remove="Resources\user_icon.svg" />
+      <Content Include="Resources\icon.ico" />
       <Resource Include="Resources\send.svg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
